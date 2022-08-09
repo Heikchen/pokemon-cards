@@ -5,7 +5,7 @@ import "./fonts/PokemonSolidNormal-xyWR.ttf";
 
 function App() {
   return (
-    <div>
+    <div className="container">
       <Header />
     </div>
   );

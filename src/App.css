@@ -6,3 +6,16 @@
   font-family: Pokemon-old;
   src: url("./fonts/PokemonGb-RAeo.ttf") format("truetype");
 }
+.container {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+:root {
+  --primary-blue-color: #2a75bb;
+  --secondary-blue-color: #3c5aa6;
+  --primary-yellow-color: #ffcb05;
+  --secondary-yellow-color: #c7a008;
+  --primary-white-color: #ffff;
+}
