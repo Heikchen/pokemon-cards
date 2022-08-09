@@ -8,9 +8,9 @@ function Header() {
           className="search-input"
           type="text"
           name="search"
-          placeholder="Search Pokemon Card"
+          placeholder="Search Card..."
         />
-        <button className="search-btn">></button>
+        <button className="search-btn">{">"}</button>
       </div>
       <div className="header-links-container">
         <a className="header-link" href="#">

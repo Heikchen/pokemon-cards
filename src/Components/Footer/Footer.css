@@ -1,0 +1,32 @@
+.footer-container {
+  width: 100%;
+  padding: 0 24px;
+  height: 250px;
+  background-color: var(--primary-blue-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+.footer-icons {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.footer-links-container {
+  display: flex;
+  gap: 36px;
+  flex-wrap: wrap;
+}
+.footer-links {
+  color: var(--primary-white-color);
+  font-family: Pokemon-old;
+  font-size: 12px;
+}
+.twitter,
+.github,
+.facebook {
+  color: var(--primary-white-color);
+}
