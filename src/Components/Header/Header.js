@@ -14,7 +14,7 @@ function Header() {
       </div>
       <div className="header-links-container">
         <a className="header-link" href="#">
-          Pokemon Cards
+          All Pokemon Cards
         </a>
         <a className="header-link" href="#">
           My Cards

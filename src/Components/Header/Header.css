@@ -19,10 +19,15 @@ a {
   color: var(--primary-blue-color);
   font-size: 42px;
 }
+.search-container {
+  display: flex;
+  width: 30%;
+  margin-left: 24px;
+}
 .search-input {
   padding: 0;
   padding-left: 10px;
-  max-width: 200px;
+  width: 100%;
   height: 40px;
   font-family: Pokemon-old;
   border: 5px solid var(--primary-blue-color);
@@ -42,10 +47,12 @@ a {
   color: var(--primary-white-color);
 }
 .header-links-container {
+  width: 50%;
   font-family: Pokemon-old;
   font-size: 12px;
   display: flex;
   align-items: baseline;
+  justify-content: flex-end;
   flex-wrap: wrap;
   gap: 24px;
 }
