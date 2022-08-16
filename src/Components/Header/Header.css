@@ -1,6 +1,6 @@
 a {
   text-decoration: none;
-  color: var(--primary-blue-color);
+  color: var(--secondary-blue-color);
 }
 ::placeholder {
   color: var(--primary-blue-color);
@@ -11,43 +11,17 @@ a {
   justify-content: space-between;
   width: 100%;
   min-height: 150px;
-  border-bottom: 5px solid var(--primary-blue-color);
+  border-bottom: 5px solid var(--secondary-blue-color);
   padding: 0 24px;
 }
 .header-title {
   font-family: Pokemon-solid;
-  color: var(--primary-blue-color);
+  color: var(--secondary-blue-color);
   font-size: 42px;
 }
-.search-container {
-  display: flex;
-  width: 30%;
-  margin-left: 24px;
-}
-.search-input {
-  padding: 0;
-  padding-left: 10px;
-  width: 100%;
-  height: 40px;
-  font-family: Pokemon-old;
-  border: 5px solid var(--primary-blue-color);
-  border-radius: 16px;
-  color: var(--primary-blue-color);
-  margin-right: 10px;
-}
-.search-btn {
-  width: 40px;
-  height: 50px;
-  font-family: Pokemon-old;
-  padding-bottom: 5px;
-  border: 5px solid var(--primary-blue-color);
-  border-radius: 16px;
 
-  background-color: var(--primary-blue-color);
-  color: var(--primary-white-color);
-}
 .header-links-container {
-  width: 50%;
+  width: 80%;
   font-family: Pokemon-old;
   font-size: 12px;
   display: flex;
@@ -61,8 +35,8 @@ a {
   height: 50px;
   font-family: Pokemon-old;
   padding-top: 5px;
-  border: 5px solid var(--primary-blue-color);
+  border: 5px solid var(--secondary-blue-color);
   border-radius: 16px;
-  background-color: var(--primary-blue-color);
+  background-color: var(--secondary-blue-color);
   color: var(--primary-white-color);
 }
