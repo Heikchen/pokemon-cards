@@ -1,0 +1,27 @@
+.home-title {
+  font-family: Pokemon solid;
+  font-size: 40px;
+  text-align: center;
+  color: var(--secondary-blue-color);
+}
+
+.search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 250px;
+  margin-left: 24px;
+}
+.search-input {
+  padding: 0;
+  padding-left: 10px;
+  width: 80%;
+  height: 40px;
+  font-family: Pokemon-old;
+  border: 5px solid var(--secondary-blue-color);
+  border-radius: 16px;
+  color: var(--secondary-blue-color);
+  margin-right: 10px;
+}
