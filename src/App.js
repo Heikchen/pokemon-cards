@@ -3,13 +3,13 @@ import "./App.css";
 import Header from "./Components/Header/Header";
 import "./fonts/PokemonSolidNormal-xyWR.ttf";
 import Footer from "./Components/Footer/Footer";
-import Search from "./Components/Search/Search";
+import Home from "./Components/Home/Home";
 
 function App() {
   return (
     <div className="container">
       <Header />
-      <Search />
+      <Home />
       <Footer />
     </div>
   );
