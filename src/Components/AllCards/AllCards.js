@@ -2,10 +2,12 @@ import Card from "../Card/Card";
 import "./AllCards.css";
 import axios from "axios";
 import React from "react";
+import Spinner from "../Spinner/Spinner";
 
 function AllCards() {
   const [allCards, setAllCards] = React.useState([]);
   const [page, setPage] = React.useState(1);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [indexStart, setIndexStart] = React.useState(1);
   const [indexEnd, setIndexEnd] = React.useState(250);
 
@@ -15,10 +17,12 @@ function AllCards() {
   }, [page]);
 
   const fetchCards = (selectPage) => {
+    setIsLoading(true);
     const link = `https://api.pokemontcg.io/v2/cards/?page=${selectPage}`;
     axios.get(link).then((response) => {
       setAllCards(response.data.data);
       console.log(response.data.data, link);
+      setIsLoading(false);
     });
   };
 
@@ -34,9 +38,13 @@ function AllCards() {
         Pokémon Cards {indexStart}-{indexEnd}
       </h1>
       <div className="main-cards-container">
-        {allCards.map((allCardsObject) => (
-          <Card key={allCardsObject.id} card={allCardsObject} />
-        ))}
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          allCards.map((allCardsObject) => (
+            <Card key={allCardsObject.id} card={allCardsObject} />
+          ))
+        )}
       </div>
       <button onClick={handleClick} className="cards-btn">
         More
