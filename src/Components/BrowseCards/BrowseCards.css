@@ -1,0 +1,7 @@
+.browse-cards-image {
+  width: 300px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  box-shadow: 0px 4px 20px var(--primary-grey-color);
+  margin: 24px;
+}

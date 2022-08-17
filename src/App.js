@@ -3,15 +3,20 @@ import "./App.css";
 import Header from "./Components/Header/Header";
 import "./fonts/PokemonSolidNormal-xyWR.ttf";
 import Footer from "./Components/Footer/Footer";
-import Search from "./Components/Search/Search";
+import Home from "./Components/Home/Home";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="container">
-      <Header />
-      <Search />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <div className="container">
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 
