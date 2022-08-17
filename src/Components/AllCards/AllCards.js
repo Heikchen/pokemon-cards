@@ -3,6 +3,7 @@ import "./AllCards.css";
 import axios from "axios";
 import React from "react";
 import Spinner from "../Spinner/Spinner";
+import FilterCards from "../FilterCards/FilterCards";
 
 function AllCards() {
   const [allCards, setAllCards] = React.useState([]);
@@ -37,6 +38,7 @@ function AllCards() {
       <h1 className="cards-title">
         Pokémon Cards {indexStart}-{indexEnd}
       </h1>
+      <FilterCards />
       <div className="main-cards-container">
         {isLoading ? (
           <Spinner />

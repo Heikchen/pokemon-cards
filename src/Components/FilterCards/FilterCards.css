@@ -1,0 +1,18 @@
+.filter-container {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.filter-element,
+.filter-types,
+.filter-card {
+  font-family: pokemon-old;
+  height: 50px;
+  width: 225px;
+  padding: 0 16px;
+  color: var(--primary-white-color);
+  background-color: var(--secondary-blue-color);
+  border-radius: 16px;
+  border: none;
+  font-size: 12px;
+}
