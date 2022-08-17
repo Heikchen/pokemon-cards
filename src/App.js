@@ -5,6 +5,7 @@ import "./fonts/PokemonSolidNormal-xyWR.ttf";
 import Footer from "./Components/Footer/Footer";
 import Home from "./Components/Home/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AllCards from "./Components/AllCards/AllCards";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/allcards" element={<AllCards />} />
         </Routes>
         <Footer />
       </div>

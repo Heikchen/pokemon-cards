@@ -4,6 +4,7 @@ import "./Home.css";
 import React from "react";
 import axios from "axios";
 import BrowseCards from "../BrowseCards/BrowseCards";
+import { Link } from "react-router-dom";
 
 function Home() {
   const [cardSets, setCardSets] = React.useState([]);
@@ -48,9 +49,9 @@ function Home() {
             <BrowseCards key={cardObject.id} cards={cardObject} />
           ))}
         </div>
-        <a className="more-sets" href="#">
+        <Link className="more-sets" to="/allcards">
           See More {">"}
-        </a>
+        </Link>
       </div>
     </div>
   );

@@ -8,9 +8,9 @@ function Header() {
       </Link>
 
       <div className="header-links-container">
-        <a className="header-link" href="#">
+        <Link className="header-link" to="/allcards">
           All Pokémon Cards
-        </a>
+        </Link>
         <a className="header-link" href="#">
           My Cards
         </a>
