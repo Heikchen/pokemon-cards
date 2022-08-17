@@ -8,14 +8,30 @@ function Home() {
   const [cardSets, setCardSets] = React.useState([]);
 
   React.useEffect(() => {
-    axios.get("https://api.pokemontcg.io/v2/sets").then((response) => {
-      setCardSets(response.data);
-    });
+    fetchSets();
   }, []);
+
+  const fetchSets = () => {
+    axios.get("https://api.pokemontcg.io/v2/sets").then((response) => {
+      const sets = response.data.data;
+      setCardSets(sets);
+      console.log(response.data.data);
+    });
+  };
   return (
     <div>
       <Search />
-      <BrowseSets />
+      <div className="main-sets-container">
+        <h1 className="set-header">Browse Sets</h1>
+        <div className="browse-sets-container">
+          {cardSets.slice(0, 4).map((setsObject) => (
+            <BrowseSets key={setsObject.id} sets={setsObject} />
+          ))}
+        </div>
+        <a className="more-sets" href="#">
+          See More {">"}
+        </a>
+      </div>
     </div>
   );
 }

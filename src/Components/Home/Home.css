@@ -1,0 +1,15 @@
+.main-sets-container {
+  width: 100%;
+  height: 500px;
+}
+.browse-sets-container {
+  display: flex;
+  height: 350px;
+  flex-direction: row;
+  row-gap: 24px;
+  overflow-x: scroll;
+  margin-bottom: 24px;
+}
+.more-sets {
+  font-family: Pokemon-old;
+}
