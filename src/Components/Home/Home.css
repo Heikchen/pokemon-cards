@@ -2,6 +2,13 @@
   width: 100%;
   height: 500px;
 }
+.set-header,
+.cards-header {
+  color: var(--secondary-blue-color);
+  font-family: Pokemon-old;
+  font-size: 24px;
+  margin: 24px 0 8px;
+}
 .browse-sets-container {
   display: flex;
   height: 350px;
@@ -12,4 +19,15 @@
 }
 .more-sets {
   font-family: Pokemon-old;
+}
+.main-cards-container {
+  width: 100%;
+  height: 600px;
+}
+.browse-cards-container {
+  display: flex;
+  height: 475px;
+  row-gap: 24px;
+  overflow-x: scroll;
+  margin-bottom: 24px;
 }
