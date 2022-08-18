@@ -38,9 +38,9 @@ function Home() {
             <BrowseSets key={setsObject.id} sets={setsObject} />
           ))}
         </div>
-        <a className="more-sets" href="#">
+        <Link to="/allsets" className="more-sets">
           See More {">"}
-        </a>
+        </Link>
       </div>
       <div className="main-cards-container">
         <h1 className="cards-header">Browse Cards</h1>

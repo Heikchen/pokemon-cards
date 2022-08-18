@@ -14,9 +14,9 @@ function Header() {
         <a className="header-link" href="#">
           My Cards
         </a>
-        <a className="header-link" href="#">
+        <Link className="header-link" to="/allsets">
           Sets
-        </a>
+        </Link>
         <button className="login-btn">Login</button>
       </div>
     </div>

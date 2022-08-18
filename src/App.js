@@ -6,6 +6,7 @@ import Footer from "./Components/Footer/Footer";
 import Home from "./Components/Home/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AllCards from "./Components/AllCards/AllCards";
+import AllSets from "./Components/AllSets/AllSets";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/allcards" element={<AllCards />} />
+          <Route path="/allsets" element={<AllSets />} />
         </Routes>
         <Footer />
       </div>
