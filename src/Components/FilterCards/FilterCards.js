@@ -5,6 +5,9 @@ function FilterCards() {
   const [element, setElement] = React.useState([]);
   const [subtype, setSubtype] = React.useState([]);
   const [cardtype, setCardtype] = React.useState([]);
+  const [selectElement, setSelectElement] = React.useState("");
+  const [filterElement, setFilterElement] = React.useState([]);
+  let countElement = 1;
   React.useEffect(() => {
     fetchElement();
     fetchSubtype();
@@ -25,12 +28,34 @@ function FilterCards() {
       setCardtype(response.data.data);
     });
   };
+  const handleChangeElement = (event) => {
+    setSelectElement(event.target.value);
+    console.log(selectElement);
+  };
+  const fetchFilterElement = (element) => {
+    const type = `https://api.pokemontcg.io/v2/cards/?q=types:${element}`;
+    axios.get(type).then((response) => {
+      setFilterElement(response.data.data);
+      console.log(response.data.data);
+    });
+  };
+  React.useEffect(() => {
+    if (selectElement.length > 0) {
+      fetchFilterElement(selectElement);
+    }
+  }, [selectElement]);
   return (
     <div className="filter-container">
-      <select className="filter-element">
+      <select
+        className="filter-element"
+        value={selectElement || ""}
+        onChange={handleChangeElement}
+      >
         <option>Element Type</option>
         {element.map((elementObject) => (
-          <option>{elementObject}</option>
+          <option key={countElement++} value={elementObject}>
+            {elementObject}
+          </option>
         ))}
       </select>
       <select className="filter-types">

@@ -11,10 +11,18 @@ function AllCards() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [indexStart, setIndexStart] = React.useState(1);
   const [indexEnd, setIndexEnd] = React.useState(250);
+  const [isDisabled, setIsDisabled] = React.useState(true);
 
   React.useEffect(() => {
     fetchCards(page);
     window.scrollTo(0, 0);
+    if (page > 1) {
+      setIsDisabled(false);
+      console.log("false");
+    } else if (page === 1) {
+      setIsDisabled(true);
+      console.log("true");
+    }
   }, [page]);
 
   const fetchCards = (selectPage) => {
@@ -27,10 +35,16 @@ function AllCards() {
     });
   };
 
-  const handleClick = () => {
+  const handleClicknext = () => {
     setPage((page) => page + 1);
     setIndexStart((indexStart) => indexStart + 250);
     setIndexEnd((indexEnd) => indexEnd + 250);
+    console.log(page);
+  };
+  const handleClickprevious = () => {
+    setPage((page) => page - 1);
+    setIndexStart((indexStart) => indexStart - 250);
+    setIndexEnd((indexEnd) => indexEnd - 250);
     console.log(page);
   };
   return (
@@ -39,7 +53,7 @@ function AllCards() {
         Pokémon Cards {indexStart}-{indexEnd}
       </h1>
       <FilterCards />
-      <div className="main-cards-container">
+      <div className="main-card-container">
         {isLoading ? (
           <Spinner />
         ) : (
@@ -48,9 +62,29 @@ function AllCards() {
           ))
         )}
       </div>
-      <button onClick={handleClick} className="cards-btn">
-        More
-      </button>
+      <div>
+        {isDisabled ? (
+          <button
+            disabled={true}
+            onClick={handleClickprevious}
+            className="cards-btn-previous"
+          >
+            {"<"}
+          </button>
+        ) : (
+          <button
+            disabled={false}
+            onClick={handleClickprevious}
+            className="cards-btn-previous"
+          >
+            {"<"}
+          </button>
+        )}
+
+        <button onClick={handleClicknext} className="cards-btn">
+          {">"}
+        </button>
+      </div>
     </div>
   );
 }

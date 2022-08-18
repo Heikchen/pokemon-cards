@@ -9,17 +9,19 @@
   font-size: 24px;
   margin-top: 24px;
 }
-.cards-btn {
+.cards-btn,
+.cards-btn-previous {
   background-color: var(--secondary-blue-color);
   color: var(--primary-white-color);
   font-family: pokemon-old;
   height: 50px;
-  width: 150px;
+  width: 100px;
   border: none;
   border-radius: 16px;
   cursor: pointer;
+  margin-right: 24px;
 }
-.main-cards-container {
+.main-card-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
