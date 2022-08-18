@@ -7,6 +7,7 @@ import Home from "./Components/Home/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AllCards from "./Components/AllCards/AllCards";
 import AllSets from "./Components/AllSets/AllSets";
+import Detailset from "./Components/Detailset/Detailset";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/allcards" element={<AllCards />} />
           <Route path="/allsets" element={<AllSets />} />
+          <Route path="/set/:id" element={<Detailset />} />
         </Routes>
         <Footer />
       </div>
