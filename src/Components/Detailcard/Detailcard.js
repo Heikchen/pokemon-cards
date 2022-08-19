@@ -5,15 +5,9 @@ import { useParams, Link } from "react-router-dom";
 
 function Detailcard() {
   const [oneCard, setOneCard] = React.useState([]);
-  const [holofoil, setHolofoil] = React.useState(false);
-  const [normal, setNormal] = React.useState(false);
-  const [firstedition, setFirstedition] = React.useState(false);
-  const [unlimited, setUnlimited] = React.useState(false);
-  const [reverseholofoil, setReverseHolofoil] = React.useState(false);
   const [attacks, setAttacks] = React.useState([]);
   const [weakness, setWeakness] = React.useState([]);
   const [symbol, setSymbol] = React.useState([]);
-  let edition = "response.data.data.tcgplayer.prices.1stEdition";
   let urlParamId = useParams().id;
   React.useEffect(() => {
     if (urlParamId !== undefined) {
@@ -29,26 +23,6 @@ function Detailcard() {
         setAttacks(response.data.data.attacks);
         setWeakness(response.data.data.weaknesses);
         setSymbol(response.data.data.set.images.symbol);
-        if (response.data.data.tcgplayer.prices.holofoil !== undefined) {
-          console.log("not undefined");
-          setHolofoil(true);
-        }
-        if (response.data.data.tcgplayer.prices.normal !== undefined) {
-          console.log("not undefined");
-          setNormal(true);
-        }
-        if (response.data.data.tcgplayer.prices.reverseHolofoil !== undefined) {
-          console.log("not undefined");
-          setReverseHolofoil(true);
-        }
-        if (edition !== undefined) {
-          console.log("not undefined");
-          setFirstedition(true);
-        }
-        if (response.data.data.tcgplayer.prices.unlimited !== undefined) {
-          console.log("not undefined");
-          setUnlimited(true);
-        }
       });
   };
   return (
@@ -76,199 +50,48 @@ function Detailcard() {
           <p className="detail-card-market-update">
             Last Updated: {oneCard.tcgplayer?.updatedAt}
           </p>
-          {normal ? (
-            <div className="detail-card-market-prices-normal">
-              <div className="detail-card-market-detail">
-                <h2 className="detail-card-market-detail-name">
-                  Normal Market
-                </h2>
-                <p className="detail-card-market-detail-price">
-                  ${oneCard.tcgplayer.prices.normal.market}
-                </p>
+          {oneCard.tcgplayer?.prices && Object.keys(oneCard.tcgplayer.prices).map(
+            (priceItem) => (
+              <>
+              {console.log(priceItem)}
+              <div className={`detail-card-market-prices-${priceItem.toLowerCase()}`}>
+                <div className="detail-card-market-detail">
+                  <h2 className="detail-card-market-detail-name">
+                    {priceItem} Market
+                  </h2>
+                  <p className="detail-card-market-detail-price">
+                    ${oneCard.tcgplayer.prices[priceItem]?.market}
+                  </p>
+                </div>
+                <div className="detail-card-market-detail">
+                  <h2 className="detail-card-market-detail-name">{priceItem} Low</h2>
+                  <p className="detail-card-market-detail-price">
+                    ${oneCard.tcgplayer.prices[priceItem]?.low}
+                  </p>
+                </div>
+                <div className="detail-card-market-detail">
+                  <h2 className="detail-card-market-detail-name">{priceItem} Mid</h2>
+                  <p className="detail-card-market-detail-price">
+                    ${oneCard.tcgplayer.prices[priceItem]?.mid}
+                  </p>
+                </div>
+                <div className="detail-card-market-detail">
+                  <h2 className="detail-card-market-detail-name">{priceItem} High</h2>
+                  <p className="detail-card-market-detail-price">
+                    ${oneCard.tcgplayer.prices[priceItem]?.high}
+                  </p>
+                </div>
               </div>
-              <div className="detail-card-market-detail">
-                <h2 className="detail-card-market-detail-name">Normal Low</h2>
-                <p className="detail-card-market-detail-price">
-                  ${oneCard.tcgplayer.prices.normal.low}
-                </p>
-              </div>
-              <div className="detail-card-market-detail">
-                <h2 className="detail-card-market-detail-name">Normal Mid</h2>
-                <p className="detail-card-market-detail-price">
-                  ${oneCard.tcgplayer.prices.normal.mid}
-                </p>
-              </div>
-              <div className="detail-card-market-detail">
-                <h2 className="detail-card-market-detail-name">Normal High</h2>
-                <p className="detail-card-market-detail-price">
-                  ${oneCard.tcgplayer.prices.normal.high}
-                </p>
-              </div>
-            </div>
-          ) : (
+              </>
+            ))}
+          {/* ) : (
             ""
-          )}
-          {holofoil ? (
-            <div className="detail-card-market-prices-holofoil">
-              <div className="detail-card-market-detail">
-                <h2 className="detail-card-market-detail-name">
-                  Holofoil Market
-                </h2>
-                <p className="detail-card-market-detail-price">
-                  ${oneCard.tcgplayer?.prices.holofoil.market}
-                </p>
-              </div>
-              <div className="detail-card-market-detail">
-                <h2 className="detail-card-market-detail-name">Holofoil Low</h2>
-                <p className="detail-card-market-detail-price">
-                  ${oneCard.tcgplayer.prices.holofoil.low}
-                </p>
-              </div>
-              <div className="detail-card-market-detail">
-                <h2 className="detail-card-market-detail-name">Holofoil Mid</h2>
-                <p className="detail-card-market-detail-price">
-                  ${oneCard.tcgplayer.prices.holofoil.mid}
-                </p>
-              </div>
-              <div className="detail-card-market-detail">
-                <h2 className="detail-card-market-detail-name">
-                  Holofoil High
-                </h2>
-                <p className="detail-card-market-detail-price">
-                  ${oneCard.tcgplayer.prices.holofoil.high}
-                </p>
-              </div>
-            </div>
-          ) : (
-            ""
-          )}
-          {reverseholofoil ? (
-            <div className="detail-card-market-prices-reverseholofoil">
-              <div className="detail-card-market-detail">
-                <h2 className="detail-card-market-detail-name">
-                  Reverse Holofoil Market
-                </h2>
-                <p className="detail-card-market-detail-price">
-                  ${oneCard.tcgplayer?.prices.reverseHolofoil.market}
-                </p>
-              </div>
-              <div className="detail-card-market-detail">
-                <h2 className="detail-card-market-detail-name">
-                  Reverse Holofoil Low
-                </h2>
-                <p className="detail-card-market-detail-price">
-                  ${oneCard.tcgplayer.prices.reverseHolofoil.low}
-                </p>
-              </div>
-              <div className="detail-card-market-detail">
-                <h2 className="detail-card-market-detail-name">
-                  Reverse Holofoil Mid
-                </h2>
-
-                <p className="detail-card-market-detail-price">
-                  ${oneCard.tcgplayer.prices.reverseHolofoil.mid}
-                </p>
-              </div>
-              <div className="detail-card-market-detail">
-                <h2 className="detail-card-market-detail-name">
-                  Reverse Holofoil High
-                </h2>
-                <p className="detail-card-market-detail-price">
-                  ${oneCard.tcgplayer.prices.reverseHolofoil.high}
-                </p>
-              </div>
-            </div>
-          ) : (
-            ""
-          )}
-
-          {firstedition ? (
-            <div className="detail-card-market-prices-firstedition">
-              <div className="detail-card-market-detail">
-                <h2 className="detail-card-market-detail-name">
-                  1st Edition Market
-                </h2>
-                <p className="detail-card-market-detail-price">
-                  ${oneCard.tcgplayer.prices.market}
-                </p>
-              </div>
-              <div className="detail-card-market-detail">
-                <h2 className="detail-card-market-detail-name">
-                  1st Edition Low
-                </h2>
-                <p className="detail-card-market-detail-price">
-                  ${{ edition }.low}
-                </p>
-              </div>
-              <div className="detail-card-market-detail">
-                <h2 className="detail-card-market-detail-name">
-                  1st Edition Mid
-                </h2>
-                <p className="detail-card-market-detail-price">
-                  ${{ edition }.mid}
-                </p>
-              </div>
-              <div className="detail-card-market-detail">
-                <h2 className="detail-card-market-detail-name">
-                  1st Edition High
-                </h2>
-                <p className="detail-card-market-detail-price">
-                  $
-                  {oneCard.tcgplayer?.prices &&
-                    oneCard.tcgplayer.Object.keys(oneCard.tcgplayer.prices).map(
-                      (priceItem) => oneCard.tcgplayer.prices[priceItem].high
-                    )}
-                </p>
-              </div>
-            </div>
-          ) : (
-            ""
-          )}
-          {unlimited ? (
-            <div className="detail-card-market-prices-unlimited">
-              <div className="detail-card-market-detail">
-                <h2 className="detail-card-market-detail-name">
-                  Unlimited Market
-                </h2>
-                <p className="detail-card-market-detail-price">
-                  ${oneCard.tcgplayer?.prices.unlimited.market}
-                </p>
-              </div>
-              <div className="detail-card-market-detail">
-                <h2 className="detail-card-market-detail-name">
-                  Unlimited Low
-                </h2>
-                <p className="detail-card-market-detail-price">
-                  ${oneCard.tcgplayer.prices.unlimited.low}
-                </p>
-              </div>
-              <div className="detail-card-market-detail">
-                <h2 className="detail-card-market-detail-name">
-                  Unlimited Mid
-                </h2>
-
-                <p className="detail-card-market-detail-price">
-                  ${oneCard.tcgplayer.prices.unlimited.mid}
-                </p>
-              </div>
-              <div className="detail-card-market-detail">
-                <h2 className="detail-card-market-detail-name">
-                  Unlimited High
-                </h2>
-                <p className="detail-card-market-detail-price">
-                  ${oneCard.tcgplayer.prices.unlimited.high}
-                </p>
-              </div>
-            </div>
-          ) : (
-            ""
-          )}
-        </div>
+          )} */}
 
         <div className="detail-card-attacks">
           <h1 className="detail-card-attacks-title">Attacks</h1>
           {attacks !== undefined ? (
-            attacks.map((attacksObject) => (
+            attacks?.map((attacksObject) => (
               <div className="detail-card-attacks-info">
                 <h2 className="detail-card-attacks-name">
                   {attacksObject.name}
@@ -285,7 +108,7 @@ function Detailcard() {
             <div>
               <h1 className="info-name">Weakness</h1>
               {attacks !== undefined ? (
-                weakness.map((weaknessObject) => (
+                weakness?.map((weaknessObject) => (
                   <h2 className="info-text">
                     {weaknessObject.type} {weaknessObject.value}
                   </h2>
@@ -359,6 +182,8 @@ function Detailcard() {
         </div>
       </div>
     </div>
+    </div>
+
   );
 }
 
