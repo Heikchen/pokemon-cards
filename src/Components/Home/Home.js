@@ -4,10 +4,11 @@ import "./Home.css";
 import React from "react";
 import axios from "axios";
 import BrowseCards from "../BrowseCards/BrowseCards";
-import { Link } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 
 function Home() {
   const [cardSets, setCardSets] = React.useState([]);
+  const [pokemon, setPokemon] = React.useState([]);
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
@@ -28,9 +29,16 @@ function Home() {
     });
   };
 
+  const handleKeyDown = (event) => {
+    if (event.keyCode === 13) {
+      setPokemon(event.target.value);
+      console.log(event.target.value);
+    }
+  };
+
   return (
     <div>
-      <Search />
+      <Search change={handleKeyDown} />
       <div className="main-sets-container">
         <h1 className="set-header">Browse Sets</h1>
         <div className="browse-sets-container">

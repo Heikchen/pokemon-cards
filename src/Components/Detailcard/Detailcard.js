@@ -76,7 +76,6 @@ function Detailcard() {
           <p className="detail-card-market-update">
             Last Updated: {oneCard.tcgplayer?.updatedAt}
           </p>
-
           {normal ? (
             <div className="detail-card-market-prices-normal">
               <div className="detail-card-market-detail">
@@ -109,7 +108,6 @@ function Detailcard() {
           ) : (
             ""
           )}
-
           {holofoil ? (
             <div className="detail-card-market-prices-holofoil">
               <div className="detail-card-market-detail">
@@ -144,7 +142,6 @@ function Detailcard() {
           ) : (
             ""
           )}
-
           {reverseholofoil ? (
             <div className="detail-card-market-prices-reverseholofoil">
               <div className="detail-card-market-detail">
@@ -216,7 +213,11 @@ function Detailcard() {
                   1st Edition High
                 </h2>
                 <p className="detail-card-market-detail-price">
-                  ${{ edition }.high}
+                  $
+                  {oneCard.tcgplayer?.prices &&
+                    oneCard.tcgplayer.Object.keys(oneCard.tcgplayer.prices).map(
+                      (priceItem) => oneCard.tcgplayer.prices[priceItem].high
+                    )}
                 </p>
               </div>
             </div>

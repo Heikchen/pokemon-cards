@@ -47,6 +47,7 @@ function AllCards() {
     setIndexEnd((indexEnd) => indexEnd - 250);
     console.log(page);
   };
+
   return (
     <div className="cards-container">
       <h1 className="cards-title">
