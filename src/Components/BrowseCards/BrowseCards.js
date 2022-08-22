@@ -1,9 +1,16 @@
 import "./BrowseCards.css";
+import { Link } from "react-router-dom";
 function BrowseCards(props) {
   return (
-    <div>
-      <img className="browse-cards-image" src={props.cards.images.large} />
-    </div>
+    <Link to={`/card/${props.cards.id}`}>
+      <div>
+        <img
+          className="browse-cards-image"
+          src={props.cards.images.large}
+          alt={props.cards.name}
+        />
+      </div>
+    </Link>
   );
 }
 export default BrowseCards;

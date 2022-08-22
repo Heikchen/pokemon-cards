@@ -1,5 +1,5 @@
 import "./Search.css";
-function Search() {
+function Search(props) {
   return (
     <div>
       <div className="search-container">
@@ -9,6 +9,7 @@ function Search() {
           type="text"
           name="search"
           placeholder="Search Pokémon Card..."
+          onKeyDown={props.change}
         />
       </div>
     </div>

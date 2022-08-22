@@ -4,9 +4,11 @@ import "./Home.css";
 import React from "react";
 import axios from "axios";
 import BrowseCards from "../BrowseCards/BrowseCards";
+import { Link, Route } from "react-router-dom";
 
 function Home() {
   const [cardSets, setCardSets] = React.useState([]);
+  const [pokemon, setPokemon] = React.useState([]);
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
@@ -27,9 +29,16 @@ function Home() {
     });
   };
 
+  const handleKeyDown = (event) => {
+    if (event.keyCode === 13) {
+      setPokemon(event.target.value);
+      console.log(event.target.value);
+    }
+  };
+
   return (
     <div>
-      <Search />
+      <Search change={handleKeyDown} />
       <div className="main-sets-container">
         <h1 className="set-header">Browse Sets</h1>
         <div className="browse-sets-container">
@@ -37,9 +46,9 @@ function Home() {
             <BrowseSets key={setsObject.id} sets={setsObject} />
           ))}
         </div>
-        <a className="more-sets" href="#">
+        <Link to="/allsets" className="more-sets">
           See More {">"}
-        </a>
+        </Link>
       </div>
       <div className="main-cards-container">
         <h1 className="cards-header">Browse Cards</h1>
@@ -48,9 +57,9 @@ function Home() {
             <BrowseCards key={cardObject.id} cards={cardObject} />
           ))}
         </div>
-        <a className="more-sets" href="#">
+        <Link className="more-sets" to="/allcards">
           See More {">"}
-        </a>
+        </Link>
       </div>
     </div>
   );

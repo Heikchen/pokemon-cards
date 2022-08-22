@@ -8,15 +8,15 @@ function Header() {
       </Link>
 
       <div className="header-links-container">
-        <a className="header-link" href="#">
+        <Link className="header-link" to="/allcards">
           All Pokémon Cards
-        </a>
+        </Link>
         <a className="header-link" href="#">
           My Cards
         </a>
-        <a className="header-link" href="#">
+        <Link className="header-link" to="/allsets">
           Sets
-        </a>
+        </Link>
         <button className="login-btn">Login</button>
       </div>
     </div>

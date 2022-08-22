@@ -1,0 +1,167 @@
+.detail-card {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 24px;
+  margin: 24px;
+}
+
+.detail-card-image {
+  width: 30%;
+  height: fit-content;
+  border-radius: 16px;
+  box-shadow: 5px 0px 20px 0px black;
+  margin: 24px;
+}
+.detail-card-info {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  align-items: center;
+}
+.detail-card-basic {
+  text-align: center;
+  border-bottom: 3px solid var(--primary-grey-color);
+  width: 100%;
+  color: var(--secondary-blue-color);
+}
+.detail-card-basic-name {
+  margin: 32px 0;
+  font-family: pokemon-old;
+}
+.detail-card-basic-type,
+.detail-card-basic-basic {
+  font-size: 24px;
+  font-weight: 600;
+}
+.detail-card-market {
+  width: 100%;
+  flex-direction: column;
+  display: flex;
+  border-bottom: 3px solid var(--primary-grey-color);
+  color: var(--secondary-blue-color);
+}
+.detail-card-market-link {
+  font-size: 24px;
+  font-weight: 600;
+}
+.detail-card-market-prices-normal,
+.detail-card-market-prices-holofoil,
+.detail-card-market-prices-reverseholofoil,
+.detail-card-market-prices-1stedition,
+.detail-card-market-prices-unlimited {
+  display: flex;
+  gap: 24px;
+}
+.detail-card-market-detail {
+  width: 25%;
+}
+.detail-card-market-detail-name {
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 20px;
+}
+.detail-card-market-detail-price {
+  text-transform: uppercase;
+  font-size: 20px;
+}
+
+.detail-card-attacks {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: var(--secondary-blue-color);
+  margin-bottom: 50px;
+}
+.detail-card-attacks-title {
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 20px;
+}
+
+.detail-card-attacks-name {
+  font-size: 26px;
+  font-weight: 500;
+}
+.detail-card-attacks-text {
+  font-size: 20px;
+}
+
+.detail-card-short-info {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  color: var(--secondary-blue-color);
+}
+
+.info-name {
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 20px;
+}
+.info-text {
+  font-size: 26px;
+  font-weight: 500;
+}
+.info-set {
+  display: flex;
+  align-items: center;
+  column-gap: 24px;
+  margin: 0;
+}
+.info-text-image {
+  font-size: 26px;
+  font-weight: 500;
+  margin: 0;
+}
+.info-image {
+  width: fit-content;
+  height: 50px;
+  margin: 0;
+}
+.detail-card-rule {
+  font-size: 24px;
+  color: var(--secondary-blue-color);
+  margin: 32px 0;
+  font-style: italic;
+}
+.detail-card-legalities {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.detail-card-legalities-container {
+  display: flex;
+}
+.detail-card-legalities-name {
+  background-color: black;
+  height: 40px;
+  width: 75px;
+  border-radius: 16px 0 0 16px;
+  color: var(--primary-white-color);
+  text-align: center;
+  padding-top: 20px;
+  font-size: 16px;
+}
+.detail-card-legalities-legal {
+  background-color: var(--primary-blue-color);
+  height: 40px;
+  width: 75px;
+  border-radius: 0 16px 16px 0;
+  color: var(--primary-white-color);
+  text-align: center;
+  padding-top: 20px;
+  font-size: 16px;
+}
+.detail-card-legalities-notlegal {
+  background-color: var(--primary-grey-color);
+  height: 40px;
+  width: 75px;
+  border-radius: 0 16px 16px 0;
+  color: black;
+  text-align: center;
+  padding-top: 20px;
+  font-size: 16px;
+}

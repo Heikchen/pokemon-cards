@@ -1,0 +1,16 @@
+.all-sets-title {
+  font-family: pokemon-old;
+  color: var(--secondary-blue-color);
+  font-size: 24px;
+  margin-top: 24px;
+}
+
+.all-sets-cards {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+  justify-content: center;
+  width: 100%;
+  height: fit-content;
+}
