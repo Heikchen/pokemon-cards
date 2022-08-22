@@ -15,11 +15,17 @@ function AllCards() {
   const [element, setElement] = React.useState([]);
   const [subtype, setSubtype] = React.useState([]);
   const [cardtype, setCardtype] = React.useState([]);
-  const [selectElement, setSelectElement] = React.useState("");
-  const [selectCardType, setSelectCardType] = React.useState("");
-  const [selectSubType, setSelectSubType] = React.useState("");
+  const [filter, setFilter] = React.useState([
+    { selectElement: "", selectSubType: "", selectCardType: "" },
+  ]);
 
   React.useEffect(() => {
+    setFilter({
+      ...filter,
+      selectCardType: "",
+      selectElement: "",
+      selectElement: "",
+    });
     fetchElement();
     fetchSubtype();
     fetchCardtype();
@@ -40,21 +46,16 @@ function AllCards() {
       setCardtype(response.data.data);
     });
   };
-  const handleChangeElement = (event) => {
-    setSelectElement(event.target.value);
+  const handleChange = (event) => {
+    const selectName = event.target.name;
+    const selectValue = event.target.value;
+    const newFilter = {
+      ...filter,
+      [selectName]: selectValue,
+    };
+    setFilter(newFilter);
     setPage(1);
-    console.log(selectElement);
-  };
-  const handleChangeCard = (event) => {
-    setSelectCardType(event.target.value);
-    setPage(1);
-    console.log(selectCardType);
-  };
-  const handleChangeSubtype = (event) => {
-    setSelectSubType(event.target.value);
-
-    setPage(1);
-    console.log(selectSubType);
+    console.log(newFilter);
   };
 
   const fetchFilterElement = (element, selectPage) => {
@@ -138,57 +139,71 @@ function AllCards() {
         setIsLoading(false);
       });
   };
-
+  console.log(filter);
   React.useEffect(() => {
     if (
-      selectElement.length > 0 &&
-      selectCardType === "" &&
-      selectSubType === ""
+      filter.selectElement === "" &&
+      filter.selectCardType === "" &&
+      filter.selectSubType === ""
     ) {
-      fetchFilterElement(selectElement, page);
-    } else if (
-      selectCardType.length > 0 &&
-      selectElement === "" &&
-      selectSubType === ""
-    ) {
-      fetchFilterCard(selectCardType, page);
-    } else if (
-      selectCardType.length > 0 &&
-      selectElement.length > 0 &&
-      selectSubType === ""
-    ) {
-      fetchCardElement(selectCardType, selectElement, page);
-    } else if (
-      selectSubType.length > 0 &&
-      selectElement === "" &&
-      selectCardType === ""
-    ) {
-      fetchFilterSubtype(selectSubType, page);
-    } else if (
-      selectSubType.length > 0 &&
-      selectElement.length > 0 &&
-      selectCardType === ""
-    ) {
-      fetchsubElement(selectSubType, selectElement, page);
-    } else if (
-      selectSubType.length > 0 &&
-      selectCardType.length > 0 &&
-      selectElement === ""
-    ) {
-      fetchsubCard(selectSubType, selectCardType, page);
-    } else if (
-      selectSubType.length > 0 &&
-      selectCardType.length > 0 &&
-      selectElement.length > 0
-    ) {
-      fetchsubCardElement(selectSubType, selectCardType, selectElement, page);
-    } else {
       fetchCards(page);
+      console.log("all", filter, filter.selectElement);
+    } else if (
+      filter.selectElement !== "" &&
+      filter?.selectCardType === "" &&
+      filter?.selectSubType === ""
+    ) {
+      fetchFilterElement(filter.selectElement, page);
+    } else if (
+      filter[0].selectCardType !== "" &&
+      filter[0].selectElement === "" &&
+      filter[0].selectSubType === ""
+    ) {
+      fetchFilterCard(filter.selectCardType, page);
+    } else if (
+      filter.selectCardType !== "" &&
+      filter.selectElement !== "" &&
+      filter.selectSubType === ""
+    ) {
+      fetchCardElement(filter.selectCardType, filter.selectElement, page);
+    } else if (
+      filter.selectSubType !== "" &&
+      filter.selectElement === "" &&
+      filter.selectCardType === ""
+    ) {
+      fetchFilterSubtype(filter.selectSubType, page);
+    } else if (
+      filter.selectSubType !== "" &&
+      filter.selectElement !== "" &&
+      filter.selectCardType === ""
+    ) {
+      fetchsubElement(filter.selectSubType, filter.selectElement, page);
+    } else if (
+      filter.selectSubType !== "" &&
+      filter.selectCardType !== "" &&
+      filter.selectElement === ""
+    ) {
+      fetchsubCard(filter.selectSubType, filter.selectCardType, page);
+    } else if (
+      filter.selectSubType !== "" &&
+      filter.selectCardType !== "" &&
+      filter.selectElement !== ""
+    ) {
+      fetchsubCardElement(
+        filter.selectSubType,
+        filter.selectCardType,
+        filter.selectElement,
+        page
+      );
     }
-  }, [selectElement, selectCardType, selectSubType]);
+  }, [filter, page]);
 
-  React.useEffect(() => {
-    if (selectElement === "") {
+  /*React.useEffect(() => {
+    if (
+      filter.selectElement === "" &&
+      filter.selectCardType === "" &&
+      filter.selectSubType === ""
+    ) {
       fetchCards(page);
       console.log("all");
     } else {
@@ -203,7 +218,7 @@ function AllCards() {
       setIsDisabled(true);
       console.log("true");
     }
-  }, [page]);
+  }, [page]);*/
 
   const fetchCards = (selectPage) => {
     setIsLoading(true);
@@ -234,15 +249,13 @@ function AllCards() {
         Pokémon Cards {indexStart}-{indexEnd}
       </h1>
       <FilterCards
-        change={handleChangeElement}
+        change={handleChange}
         element={element}
         subtype={subtype}
         cardtype={cardtype}
-        selectElement={selectElement}
-        selectCardType={selectCardType}
-        selectSubType={selectSubType}
-        changeCard={handleChangeCard}
-        changesubtype={handleChangeSubtype}
+        selectElement={filter.selectElement}
+        selectCardType={filter.selectCardType}
+        selectSubType={filter.selectSubType}
       />
       <div className="main-card-container">
         {isLoading ? (

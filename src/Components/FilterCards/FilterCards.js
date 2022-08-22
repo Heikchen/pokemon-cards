@@ -9,6 +9,7 @@ function FilterCards(props) {
         className="filter-element"
         value={props.selectElement || ""}
         onChange={props.change}
+        name="selectElement"
       >
         <option value="">Element Type</option>
         {props.element.map((elementObject) => (
@@ -20,7 +21,8 @@ function FilterCards(props) {
       <select
         className="filter-types"
         value={props.selectSubType || ""}
-        onChange={props.changesubtype}
+        onChange={props.change}
+        name="selectSubType"
       >
         <option value="">Subtype</option>
         {props.subtype.map((subtypeObject) => (
@@ -32,7 +34,8 @@ function FilterCards(props) {
       <select
         className="filter-card"
         value={props.selectCardType || ""}
-        onChange={props.changeCard}
+        onChange={props.change}
+        name="selectCardType"
       >
         <option value="">Card Type</option>
         {props.cardtype.map((cardtypeObject) => (
