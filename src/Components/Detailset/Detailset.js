@@ -29,6 +29,9 @@ function Detailset() {
       <h1 className="one-set-title">
         Set: {oneSet[0]?.set.id} - {oneSet[0]?.set.total} Cards
       </h1>
+      <Link to={"/allsets"}>
+        <button className="back-to-sets"> {"<"} </button>
+      </Link>
       {isLoading ? (
         <Spinner />
       ) : (
