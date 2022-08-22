@@ -12,9 +12,119 @@ function AllCards() {
   const [indexStart, setIndexStart] = React.useState(1);
   const [indexEnd, setIndexEnd] = React.useState(250);
   const [isDisabled, setIsDisabled] = React.useState(true);
-
+  const [element, setElement] = React.useState([]);
+  const [subtype, setSubtype] = React.useState([]);
+  const [cardtype, setCardtype] = React.useState([]);
+  const [filter, setFilter] = React.useState([
+    { selectElement: "", selectSubType: "", selectCardType: "" },
+  ]);
+  const filterElement = `types:${filter.selectElement}`;
+  const filterCardType = `supertype:${filter.selectCardType}`;
+  const filterSubType = `subtypes:${filter.selectSubType}`;
   React.useEffect(() => {
-    fetchCards(page);
+    setFilter({
+      ...filter,
+      selectCardType: "",
+      selectElement: "",
+      selectSubType: "",
+    });
+    fetchElement();
+    fetchSubtype();
+    fetchCardtype();
+  }, []);
+
+  const fetchElement = () => {
+    axios.get("https://api.pokemontcg.io/v2/types").then((response) => {
+      setElement(response.data.data);
+    });
+  };
+  const fetchSubtype = () => {
+    axios.get("https://api.pokemontcg.io/v2/subtypes").then((response) => {
+      setSubtype(response.data.data);
+    });
+  };
+  const fetchCardtype = () => {
+    axios.get("https://api.pokemontcg.io/v2/supertypes").then((response) => {
+      setCardtype(response.data.data);
+    });
+  };
+  const handleChange = (event) => {
+    const selectName = event.target.name;
+    const selectValue = event.target.value;
+    const newFilter = {
+      ...filter,
+      [selectName]: selectValue,
+    };
+    setFilter(newFilter);
+    setPage(1);
+    console.log(newFilter);
+  };
+
+  const fetchFilter = (filtertype, selectPage) => {
+    setIsLoading(true);
+    const type = `https://api.pokemontcg.io/v2/cards/?q=${filtertype};page=${selectPage}/`;
+    axios.get(type).then((response) => {
+      setAllCards(response.data.data);
+      console.log(response.data.data, type);
+      setIsLoading(false);
+    });
+  };
+
+  console.log(filter);
+  React.useEffect(() => {
+    if (
+      filter.selectElement === "" &&
+      filter.selectCardType === "" &&
+      filter.selectSubType === ""
+    ) {
+      fetchCards(page);
+      console.log("all", filter, filter.selectElement);
+    } else if (
+      filter.selectElement !== "" &&
+      filter.selectCardType === "" &&
+      filter.selectSubType === ""
+    ) {
+      fetchFilter(filterElement, page);
+    } else if (
+      filter.selectCardType !== "" &&
+      filter.selectElement === "" &&
+      filter.selectSubType === ""
+    ) {
+      fetchFilter(filterCardType, page);
+    } else if (
+      filter.selectCardType !== "" &&
+      filter.selectElement !== "" &&
+      filter.selectSubType === ""
+    ) {
+      fetchFilter(`${filterCardType}%20${filterElement}`, page);
+    } else if (
+      filter.selectSubType !== "" &&
+      filter.selectElement === "" &&
+      filter.selectCardType === ""
+    ) {
+      fetchFilter(filterSubType, page);
+    } else if (
+      filter.selectSubType !== "" &&
+      filter.selectElement !== "" &&
+      filter.selectCardType === ""
+    ) {
+      fetchFilter(`${filterSubType}%20${filterElement}`, page);
+    } else if (
+      filter.selectSubType !== "" &&
+      filter.selectCardType !== "" &&
+      filter.selectElement === ""
+    ) {
+      fetchFilter(`${filterSubType}%20${filterCardType}`, page);
+    } else if (
+      filter.selectSubType !== "" &&
+      filter.selectCardType !== "" &&
+      filter.selectElement !== ""
+    ) {
+      fetchFilter(
+        `${filterSubType}%20${filterCardType}%20${filterElement}`,
+        page
+      );
+    }
     window.scrollTo(0, 0);
     if (page > 1) {
       setIsDisabled(false);
@@ -23,7 +133,7 @@ function AllCards() {
       setIsDisabled(true);
       console.log("true");
     }
-  }, [page]);
+  }, [filter, page]);
 
   const fetchCards = (selectPage) => {
     setIsLoading(true);
@@ -53,7 +163,15 @@ function AllCards() {
       <h1 className="cards-title">
         Pokémon Cards {indexStart}-{indexEnd}
       </h1>
-      <FilterCards />
+      <FilterCards
+        change={handleChange}
+        element={element}
+        subtype={subtype}
+        cardtype={cardtype}
+        selectElement={filter.selectElement}
+        selectCardType={filter.selectCardType}
+        selectSubType={filter.selectSubType}
+      />
       <div className="main-card-container">
         {isLoading ? (
           <Spinner />

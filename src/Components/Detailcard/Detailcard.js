@@ -114,70 +114,25 @@ function Detailcard() {
                   </h2>
                 ))
               ) : (
-                <p>Not available</p>
+                <p className="detail-card-legalities-notlegal">Not Legal</p>
               )}
             </div>
-            <div>
-              <h1 className="info-name">Rarity</h1>
-              <h2 className="info-text">{oneCard.rarity}</h2>
+            <div className="detail-card-legalities-container">
+              <p className="detail-card-legalities-name">Expanded</p>
+              {oneCard.legalities?.expanded !== undefined ? (
+                <p className="detail-card-legalities-legal">Legal</p>
+              ) : (
+                <p className="detail-card-legalities-notlegal">Not Legal</p>
+              )}
             </div>
-            <div>
-              <h1 className="info-name">Number</h1>
-              <h2 className="info-text">
-                {oneCard.number} / {oneCard.set?.total}
-              </h2>
+            <div className="detail-card-legalities-container">
+              <p className="detail-card-legalities-name">Unlimited</p>
+              {oneCard.legalities?.unlimited !== undefined ? (
+                <p className="detail-card-legalities-legal">Legal</p>
+              ) : (
+                <p className="detail-card-legalities-notlegal">Not Legal</p>
+              )}
             </div>
-          </div>
-          <div className="info-right">
-            <div>
-              <h1 className="info-name">Pokedex Number</h1>
-              <h2 className="info-text">{oneCard.nationalPokedexNumbers}</h2>
-            </div>
-            <div>
-              <h1 className="info-name">Artist</h1>
-              <h2 className="info-text">{oneCard.artist}</h2>
-            </div>
-
-            <div>
-              <h1 className="info-name">Set</h1>
-              <Link to={`/set/${oneCard.set?.id}`}>
-                <div className="info-set">
-                  <h2 className="info-text-image">{oneCard.set?.name}</h2>
-                  <img
-                    className="info-image"
-                    src={symbol}
-                    alt={oneCard.set?.name}
-                  />
-                </div>
-              </Link>
-            </div>
-          </div>
-        </div>
-        <p className="detail-card-rule">{oneCard.rules}</p>
-        <div className="detail-card-legalities">
-          <div className="detail-card-legalities-container">
-            <p className="detail-card-legalities-name">Standard</p>
-            {oneCard.legalities?.standard !== undefined ? (
-              <p className="detail-card-legalities-legal">Legal</p>
-            ) : (
-              <p className="detail-card-legalities-notlegal">Not Legal</p>
-            )}
-          </div>
-          <div className="detail-card-legalities-container">
-            <p className="detail-card-legalities-name">Expanded</p>
-            {oneCard.legalities?.expanded !== undefined ? (
-              <p className="detail-card-legalities-legal">Legal</p>
-            ) : (
-              <p className="detail-card-legalities-notlegal">Not Legal</p>
-            )}
-          </div>
-          <div className="detail-card-legalities-container">
-            <p className="detail-card-legalities-name">Unlimited</p>
-            {oneCard.legalities?.unlimited !== undefined ? (
-              <p className="detail-card-legalities-legal">Legal</p>
-            ) : (
-              <p className="detail-card-legalities-notlegal">Not Legal</p>
-            )}
           </div>
         </div>
       </div>

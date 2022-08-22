@@ -1,20 +1,23 @@
 import "./SearchCard.css";
 import React from "react";
 import axios from "axios";
-import { useParams, Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import Card from "../Card/Card";
 
-function SearchCard() {
+function SearchCard(props) {
   const [result, setResult] = React.useState([]);
-
-  const pokemon = useParams();
+  const location = useLocation();
 
   React.useEffect(() => {
+    console.log(location.state.pokemonSearch);
     fetchSearch();
-  }, [pokemon]);
+  }, []);
 
   const fetchSearch = () => {
     axios
-      .get(`https://api.pokemontcg.io/v2/cards/?q=name:${pokemon.pokemon}`)
+      .get(
+        `https://api.pokemontcg.io/v2/cards/?q=name:${location.state.pokemonSearch}`
+      )
       .then((response) => {
         setResult(response.data.data);
         console.log(response.data.data);
@@ -24,14 +27,8 @@ function SearchCard() {
     <div>
       <h1 className="search-cards-title">Pokémon Cards {result.length}</h1>
       <div className="search-cards-container">
-        {result.map((resultObject) => (
-          <Link to={`/card/${resultObject.id}`}>
-            <img
-              className="search-cards-image"
-              src={resultObject.images.small}
-              alt={resultObject.name}
-            />
-          </Link>
+        {result.map((resultsObject) => (
+          <Card key={resultsObject.id} card={resultsObject} />
         ))}
       </div>
     </div>

@@ -25,5 +25,5 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  height: fit-content;
+  min-height: 500px;
 }
