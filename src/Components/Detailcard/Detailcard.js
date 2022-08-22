@@ -5,7 +5,6 @@ import { useParams, Link } from "react-router-dom";
 
 function Detailcard() {
   const [oneCard, setOneCard] = React.useState([]);
-
   const [attacks, setAttacks] = React.useState([]);
   const [weakness, setWeakness] = React.useState([]);
   const [symbol, setSymbol] = React.useState([]);
@@ -44,6 +43,7 @@ function Detailcard() {
             <button className="detail-card-minus-btn">-</button>
           </div>
         </div>
+
         <div className="detail-card-info">
           <div className="detail-card-basic">
             <h1 className="detail-card-basic-name">{oneCard.name}</h1>
@@ -212,11 +212,14 @@ function Detailcard() {
                   <p className="detail-card-legalities-notlegal">Not Legal</p>
                 )}
               </div>
+
             </div>
           </div>
         </div>
       </div>
     </div>
+    </div>
+
   );
 }
 
