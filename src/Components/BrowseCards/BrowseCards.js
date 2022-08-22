@@ -6,7 +6,7 @@ function BrowseCards(props) {
       <div>
         <img
           className="browse-cards-image"
-          src={props.cards.images.large}
+          src={props.cards.images.small}
           alt={props.cards.name}
         />
       </div>

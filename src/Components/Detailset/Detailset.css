@@ -10,6 +10,20 @@
   font-size: 24px;
   margin-top: 24px;
 }
+.back-to-sets {
+  background-color: var(--primary-blue-color);
+  height: 40px;
+  width: 75px;
+  border: none;
+  border-radius: 16px;
+  color: var(--primary-white-color);
+  text-align: center;
+  font-size: 16px;
+  font-family: pokemon-old;
+  font-weight: 800;
+  margin: 0 0 24px 24px;
+  cursor: pointer;
+}
 .one-set {
   display: flex;
   flex-wrap: wrap;
