@@ -18,13 +18,15 @@ function AllCards() {
   const [filter, setFilter] = React.useState([
     { selectElement: "", selectSubType: "", selectCardType: "" },
   ]);
-
+  const filterElement = `types:${filter.selectElement}`;
+  const filterCardType = `supertype:${filter.selectCardType}`;
+  const filterSubType = `subtypes:${filter.selectSubType}`;
   React.useEffect(() => {
     setFilter({
       ...filter,
       selectCardType: "",
       selectElement: "",
-      selectElement: "",
+      selectSubType: "",
     });
     fetchElement();
     fetchSubtype();
@@ -58,87 +60,16 @@ function AllCards() {
     console.log(newFilter);
   };
 
-  const fetchFilterElement = (element, selectPage) => {
+  const fetchFilter = (filtertype, selectPage) => {
     setIsLoading(true);
-    const type = `https://api.pokemontcg.io/v2/cards/?q=types:${element};page=${selectPage}/`;
+    const type = `https://api.pokemontcg.io/v2/cards/?q=${filtertype};page=${selectPage}/`;
     axios.get(type).then((response) => {
       setAllCards(response.data.data);
       console.log(response.data.data, type);
       setIsLoading(false);
     });
   };
-  const fetchFilterCard = (cardType, selectPage) => {
-    setIsLoading(true);
-    axios
-      .get(
-        `https://api.pokemontcg.io/v2/cards/?q=supertype:${cardType};page=${selectPage}/`
-      )
-      .then((response) => {
-        setAllCards(response.data.data);
-        console.log(response.data.data);
-        setIsLoading(false);
-      });
-  };
-  const fetchFilterSubtype = (subtype, selectPage) => {
-    setIsLoading(true);
-    axios
-      .get(
-        `https://api.pokemontcg.io/v2/cards/?q=subtypes:${subtype};page=${selectPage}/`
-      )
-      .then((response) => {
-        setAllCards(response.data.data);
-        console.log(response.data.data);
-        setIsLoading(false);
-      });
-  };
-  const fetchCardElement = (cardType, element, selectPage) => {
-    setIsLoading(true);
-    axios
-      .get(
-        `https://api.pokemontcg.io/v2/cards/?q=supertype:${cardType}%20types:${element};page=${selectPage}/`
-      )
-      .then((response) => {
-        setAllCards(response.data.data);
-        console.log(response.data.data);
-        setIsLoading(false);
-      });
-  };
-  const fetchsubElement = (subtype, element, selectPage) => {
-    setIsLoading(true);
-    axios
-      .get(
-        `https://api.pokemontcg.io/v2/cards/?q=types:${element}%20subtypes:${subtype};page=${selectPage}/`
-      )
-      .then((response) => {
-        setAllCards(response.data.data);
-        console.log(response.data.data);
-        setIsLoading(false);
-      });
-  };
-  const fetchsubCard = (subtype, cardtype, selectPage) => {
-    setIsLoading(true);
-    axios
-      .get(
-        `https://api.pokemontcg.io/v2/cards/?q=supertype:${cardtype}%20subtypes:${subtype};page=${selectPage}/`
-      )
-      .then((response) => {
-        setAllCards(response.data.data);
-        console.log(response.data.data);
-        setIsLoading(false);
-      });
-  };
-  const fetchsubCardElement = (subtype, cardtype, element, selectPage) => {
-    setIsLoading(true);
-    axios
-      .get(
-        `https://api.pokemontcg.io/v2/cards/?q=supertype:${cardtype}%20types:${element}%20subtypes:${subtype};page=${selectPage}/`
-      )
-      .then((response) => {
-        setAllCards(response.data.data);
-        console.log(response.data.data);
-        setIsLoading(false);
-      });
-  };
+
   console.log(filter);
   React.useEffect(() => {
     if (
@@ -150,65 +81,49 @@ function AllCards() {
       console.log("all", filter, filter.selectElement);
     } else if (
       filter.selectElement !== "" &&
-      filter?.selectCardType === "" &&
-      filter?.selectSubType === ""
+      filter.selectCardType === "" &&
+      filter.selectSubType === ""
     ) {
-      fetchFilterElement(filter.selectElement, page);
+      fetchFilter(filterElement, page);
     } else if (
-      filter[0].selectCardType !== "" &&
-      filter[0].selectElement === "" &&
-      filter[0].selectSubType === ""
+      filter.selectCardType !== "" &&
+      filter.selectElement === "" &&
+      filter.selectSubType === ""
     ) {
-      fetchFilterCard(filter.selectCardType, page);
+      fetchFilter(filterCardType, page);
     } else if (
       filter.selectCardType !== "" &&
       filter.selectElement !== "" &&
       filter.selectSubType === ""
     ) {
-      fetchCardElement(filter.selectCardType, filter.selectElement, page);
+      fetchFilter(`${filterCardType}%20${filterElement}`, page);
     } else if (
       filter.selectSubType !== "" &&
       filter.selectElement === "" &&
       filter.selectCardType === ""
     ) {
-      fetchFilterSubtype(filter.selectSubType, page);
+      fetchFilter(filterSubType, page);
     } else if (
       filter.selectSubType !== "" &&
       filter.selectElement !== "" &&
       filter.selectCardType === ""
     ) {
-      fetchsubElement(filter.selectSubType, filter.selectElement, page);
+      fetchFilter(`${filterSubType}%20${filterElement}`, page);
     } else if (
       filter.selectSubType !== "" &&
       filter.selectCardType !== "" &&
       filter.selectElement === ""
     ) {
-      fetchsubCard(filter.selectSubType, filter.selectCardType, page);
+      fetchFilter(`${filterSubType}%20${filterCardType}`, page);
     } else if (
       filter.selectSubType !== "" &&
       filter.selectCardType !== "" &&
       filter.selectElement !== ""
     ) {
-      fetchsubCardElement(
-        filter.selectSubType,
-        filter.selectCardType,
-        filter.selectElement,
+      fetchFilter(
+        `${filterSubType}%20${filterCardType}%20${filterElement}`,
         page
       );
-    }
-  }, [filter, page]);
-
-  /*React.useEffect(() => {
-    if (
-      filter.selectElement === "" &&
-      filter.selectCardType === "" &&
-      filter.selectSubType === ""
-    ) {
-      fetchCards(page);
-      console.log("all");
-    } else {
-      fetchFilterElement(selectElement, page);
-      console.log("filter", selectElement);
     }
     window.scrollTo(0, 0);
     if (page > 1) {
@@ -218,7 +133,7 @@ function AllCards() {
       setIsDisabled(true);
       console.log("true");
     }
-  }, [page]);*/
+  }, [filter, page]);
 
   const fetchCards = (selectPage) => {
     setIsLoading(true);
