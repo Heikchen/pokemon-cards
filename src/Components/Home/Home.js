@@ -4,12 +4,27 @@ import "./Home.css";
 import React from "react";
 import axios from "axios";
 import BrowseCards from "../BrowseCards/BrowseCards";
-import { Link, Route } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Home() {
   const [cardSets, setCardSets] = React.useState([]);
-  const [pokemon, setPokemon] = React.useState([]);
   const [cards, setCards] = React.useState([]);
+  const [pokemon, setPokemon] = React.useState([]);
+  let navigate = useNavigate();
+
+  const handleKeyDown = (event) => {
+    if (event.keyCode === 13) {
+      setPokemon(event.target.value);
+
+      navigate("/search", {
+        state: {
+          pokemonSearch: event.target.value,
+        },
+      });
+
+      console.log(event.target.value);
+    }
+  };
 
   React.useEffect(() => {
     fetchSets();
@@ -27,13 +42,6 @@ function Home() {
     axios.get("https://api.pokemontcg.io/v2/cards").then((response) => {
       setCards(response.data.data);
     });
-  };
-
-  const handleKeyDown = (event) => {
-    if (event.keyCode === 13) {
-      setPokemon(event.target.value);
-      console.log(event.target.value);
-    }
   };
 
   return (

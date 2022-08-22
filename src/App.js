@@ -1,4 +1,5 @@
 import "./App.css";
+import React from "react";
 import Header from "./Components/Header/Header";
 import "./fonts/PokemonSolidNormal-xyWR.ttf";
 import Footer from "./Components/Footer/Footer";
@@ -18,7 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route exact path="/allcards" element={<AllCards />} />
-          <Route path="/search/:pokemon" element={<SearchCard />} />
+          <Route path="/search" element={<SearchCard />} />
           <Route path="/allsets" element={<AllSets />} />
           <Route path="/set/:id" element={<Detailset />} />
           <Route path="/card/:id" element={<Detailcard />} />
