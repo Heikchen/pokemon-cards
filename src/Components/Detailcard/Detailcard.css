@@ -110,11 +110,13 @@
 }
 .detail-card-market-detail {
   width: 25%;
+  flex-shrink: 0;
 }
 .detail-card-market-detail-name {
   font-weight: 500;
   text-transform: uppercase;
   font-size: 20px;
+  word-wrap: break-word;
 }
 .detail-card-market-detail-price {
   text-transform: uppercase;

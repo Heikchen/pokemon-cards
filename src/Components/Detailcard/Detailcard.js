@@ -1,15 +1,17 @@
 import "./Detailcard.css";
 import React from "react";
 import axios from "axios";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 
-function Detailcard() {
+function Detailcard(props) {
   const [oneCard, setOneCard] = React.useState([]);
-
   const [attacks, setAttacks] = React.useState([]);
   const [weakness, setWeakness] = React.useState([]);
   const [symbol, setSymbol] = React.useState([]);
+  const [selectmyCards, setSelectMyCards] = React.useState([]);
   let urlParamId = useParams().id;
+  let navigate = useNavigate();
+
   React.useEffect(() => {
     if (urlParamId !== undefined) {
       fetchOneCard(urlParamId);
@@ -21,11 +23,23 @@ function Detailcard() {
       .get(`https://api.pokemontcg.io/v2/cards/${index}`)
       .then((response) => {
         setOneCard(response.data.data);
+        setSelectMyCards([...selectmyCards, response.data.data]);
         setAttacks(response.data.data.attacks);
         setWeakness(response.data.data.weaknesses);
         setSymbol(response.data.data.set.images.symbol);
       });
   };
+
+  /*async function addToMyCards() {
+    setSelectMyCards([...selectmyCards, oneCard]);
+    console.log(selectmyCards, oneCard);
+    navigate("/myCards", {
+      state: {
+        myCards: { selectmyCards },
+      },
+    });
+  }*/
+
   return (
     <div>
       <Link to={"/allcards"}>
@@ -40,7 +54,12 @@ function Detailcard() {
           />
           <h2 className="detail-card-add">Add to my Cards</h2>
           <div className="detail-card-btn">
-            <button className="detail-card-add-btn">+</button>
+            <button
+              onClick={() => props.addToMyCards(oneCard)}
+              className="detail-card-add-btn"
+            >
+              +
+            </button>
             <button className="detail-card-minus-btn">-</button>
           </div>
         </div>

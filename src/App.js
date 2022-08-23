@@ -10,8 +10,29 @@ import AllSets from "./Components/AllSets/AllSets";
 import Detailset from "./Components/Detailset/Detailset";
 import Detailcard from "./Components/Detailcard/Detailcard";
 import SearchCard from "./Components/SearchCard/SearchCard";
+import MyCards from "./Components/MyCards/MyCards";
 
 function App() {
+  const [selectmyCards, setSelectMyCards] = React.useState([]);
+  const addToMyCards = (cardToAdd) => {
+    const doesCardExistInDeck = selectmyCards.find(
+      (card) => card.id === cardToAdd.id
+    );
+
+    if (!doesCardExistInDeck) {
+      setSelectMyCards([...selectmyCards, { ...cardToAdd, count: 1 }]);
+    } else {
+      console.log(cardToAdd);
+      //cardToAdd.count += 1;
+      const newCardList = selectmyCards.map((card) => {
+        card.count += 1;
+        return card.id === cardToAdd.id ? { ...card } : card;
+      });
+
+      setSelectMyCards(newCardList);
+    }
+  };
+
   return (
     <BrowserRouter>
       <div className="container">
@@ -22,7 +43,14 @@ function App() {
           <Route path="/search" element={<SearchCard />} />
           <Route path="/allsets" element={<AllSets />} />
           <Route path="/set/:id" element={<Detailset />} />
-          <Route path="/card/:id" element={<Detailcard />} />
+          <Route
+            path="/card/:id"
+            element={<Detailcard addToMyCards={addToMyCards} />}
+          />
+          <Route
+            path="/mycards"
+            element={<MyCards selectmyCards={selectmyCards} />}
+          />
         </Routes>
         <Footer />
       </div>

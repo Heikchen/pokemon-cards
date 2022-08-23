@@ -4,12 +4,11 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import Card from "../Card/Card";
 
-function SearchCard(props) {
+function SearchCard() {
   const [result, setResult] = React.useState([]);
   const location = useLocation();
 
   React.useEffect(() => {
-    console.log(location.state.pokemonSearch);
     fetchSearch();
   }, []);
 

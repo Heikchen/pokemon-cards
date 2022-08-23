@@ -72,16 +72,17 @@ function AllCards() {
   };
   const fetchCards = (selectPage) => {
     setIsLoading(true);
-    const link = `https://api.pokemontcg.io/v2/cards/?page=${selectPage}`;
-    axios.get(link).then((response) => {
-      setAllCards(response.data.data);
-      console.log(response.data.data, link);
-      setIsLoading(false);
-    });
+    axios
+      .get(`https://api.pokemontcg.io/v2/cards/?page=${selectPage}`)
+      .then((response) => {
+        setAllCards(response.data.data);
+        console.log(response.data.data);
+        setIsLoading(false);
+      });
   };
 
-  console.log(filter);
   React.useEffect(() => {
+    setIsLoading(true);
     if (
       filter.selectElement === "" &&
       filter.selectCardType === "" &&
@@ -128,8 +129,10 @@ function AllCards() {
     } else if (
       filter.selectSubType !== "" &&
       filter.selectCardType !== "" &&
-      filter.selectElement !== ""
+      filter.selectElement !== "" &&
+      filter.selectElement !== undefined
     ) {
+      setIsLoading(true);
       fetchFilter(
         `${filterSubType}%20${filterCardType}%20${filterElement}`,
         page
