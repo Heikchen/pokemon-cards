@@ -23,10 +23,13 @@ function App() {
       setSelectMyCards([...selectmyCards, { ...cardToAdd, count: 1 }]);
     } else {
       console.log(cardToAdd);
-      //cardToAdd.count += 1;
       const newCardList = selectmyCards.map((card) => {
-        card.count += 1;
-        return card.id === cardToAdd.id ? { ...card } : card;
+        if (card.id === cardToAdd.id) {
+          card.count += 1;
+          return { ...card };
+        } else {
+          return { ...card };
+        }
       });
 
       setSelectMyCards(newCardList);
