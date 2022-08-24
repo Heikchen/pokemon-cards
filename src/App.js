@@ -35,6 +35,27 @@ function App() {
       setSelectMyCards(newCardList);
     }
   };
+  const removeMyCards = (removeFromCard) => {
+    console.log(removeFromCard);
+
+    const removeCardList = selectmyCards.map((card) => {
+      if (card.id === removeFromCard.id) {
+        if (card.count > 1) {
+          card.count -= 1;
+          console.log(card);
+          return { ...card };
+        } else if (card.count === 1) {
+          return null;
+        }
+      } else if (card.id !== removeFromCard.id) {
+        return { ...card };
+      }
+    });
+
+    const newList = removeCardList.filter((item) => item !== null);
+    setSelectMyCards(newList);
+    console.log(selectmyCards);
+  };
 
   return (
     <BrowserRouter>
@@ -48,7 +69,12 @@ function App() {
           <Route path="/set/:id" element={<Detailset />} />
           <Route
             path="/card/:id"
-            element={<Detailcard addToMyCards={addToMyCards} />}
+            element={
+              <Detailcard
+                addToMyCards={addToMyCards}
+                removeMyCards={removeMyCards}
+              />
+            }
           />
           <Route
             path="/mycards"

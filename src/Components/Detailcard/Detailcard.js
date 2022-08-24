@@ -1,7 +1,7 @@
 import "./Detailcard.css";
 import React from "react";
 import axios from "axios";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 function Detailcard(props) {
   const [oneCard, setOneCard] = React.useState([]);
@@ -10,7 +10,6 @@ function Detailcard(props) {
   const [symbol, setSymbol] = React.useState([]);
   const [selectmyCards, setSelectMyCards] = React.useState([]);
   let urlParamId = useParams().id;
-  let navigate = useNavigate();
 
   React.useEffect(() => {
     if (urlParamId !== undefined) {
@@ -60,7 +59,12 @@ function Detailcard(props) {
             >
               +
             </button>
-            <button className="detail-card-minus-btn">-</button>
+            <button
+              onClick={() => props.removeMyCards(oneCard)}
+              className="detail-card-minus-btn"
+            >
+              -
+            </button>
           </div>
         </div>
         <div className="detail-card-info">
