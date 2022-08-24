@@ -12,6 +12,9 @@
   margin: 24px 0 0 24px;
   cursor: pointer;
 }
+.back-all-cards:active {
+  transform: scale(0.94);
+}
 
 .detail-card {
   display: flex;
