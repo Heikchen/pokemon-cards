@@ -8,7 +8,7 @@ function Detailcard(props) {
   const [attacks, setAttacks] = React.useState([]);
   const [weakness, setWeakness] = React.useState([]);
   const [symbol, setSymbol] = React.useState([]);
-  const [selectmyCards, setSelectMyCards] = React.useState([]);
+
   let urlParamId = useParams().id;
 
   React.useEffect(() => {
@@ -22,25 +22,17 @@ function Detailcard(props) {
       .get(`https://api.pokemontcg.io/v2/cards/${index}`)
       .then((response) => {
         setOneCard(response.data.data);
-        setSelectMyCards([...selectmyCards, response.data.data]);
         setAttacks(response.data.data.attacks);
         setWeakness(response.data.data.weaknesses);
         setSymbol(response.data.data.set.images.symbol);
       });
   };
-
-  /*async function addToMyCards() {
-    setSelectMyCards([...selectmyCards, oneCard]);
-    console.log(selectmyCards, oneCard);
-    navigate("/myCards", {
-      state: {
-        myCards: { selectmyCards },
-      },
-    });
-  }*/
+  React.useEffect(() => {
+    props.handleOwnCards(oneCard);
+  }, [oneCard, props.ownCards]);
 
   return (
-    <div>
+    <div key={oneCard.id}>
       <Link to={"/allcards"}>
         <button className="back-all-cards"> {"<"} </button>
       </Link>
@@ -52,6 +44,12 @@ function Detailcard(props) {
             alt={oneCard.name}
           />
           <h2 className="detail-card-add">Add to my Cards</h2>
+
+          {props.showCount.length > 0 ? (
+            <h2 className="detail-card-add">Own: {props.showCount}</h2>
+          ) : (
+            ""
+          )}
           <div className="detail-card-btn">
             <button
               onClick={() => props.addToMyCards(oneCard)}

@@ -14,6 +14,8 @@ import MyCards from "./Components/MyCards/MyCards";
 
 function App() {
   const [selectmyCards, setSelectMyCards] = React.useState([]);
+  const [ownCard, setOwnCard] = React.useState([]);
+
   const addToMyCards = (cardToAdd) => {
     const doesCardExistInDeck = selectmyCards.find(
       (card) => card.id === cardToAdd.id
@@ -36,8 +38,6 @@ function App() {
     }
   };
   const removeMyCards = (removeFromCard) => {
-    console.log(removeFromCard);
-
     const removeCardList = selectmyCards.map((card) => {
       if (card.id === removeFromCard.id) {
         if (card.count > 1) {
@@ -57,6 +57,53 @@ function App() {
     console.log(selectmyCards);
   };
 
+  const addCard = (cardToAdd) => {
+    const newCardList = selectmyCards.map((card) => {
+      if (card.id === cardToAdd) {
+        card.count += 1;
+        return { ...card };
+      } else {
+        return { ...card };
+      }
+    });
+
+    setSelectMyCards(newCardList);
+  };
+  const removeCard = (removeCard) => {
+    const removeCardList = selectmyCards.map((card) => {
+      if (card.id === removeCard) {
+        if (card.count > 1) {
+          card.count -= 1;
+          console.log(card);
+          return { ...card };
+        } else if (card.count === 1) {
+          return null;
+        }
+      } else if (card.id !== removeCard) {
+        return { ...card };
+      }
+    });
+
+    const newList = removeCardList.filter((item) => item !== null);
+    setSelectMyCards(newList);
+    console.log(selectmyCards);
+  };
+  const handleOwnCards = (countOwnCards) => {
+    const countCards = selectmyCards.map((card) => {
+      console.log(countOwnCards);
+      if (card.id === countOwnCards.id) {
+        console.log(card.count);
+        return card.count;
+      } else {
+        return;
+      }
+    });
+    console.log(countCards);
+    const newCards = countCards.filter((item) => item !== undefined);
+    console.log(newCards);
+    setOwnCard(newCards);
+    console.log(ownCard);
+  };
   return (
     <BrowserRouter>
       <div className="container">
@@ -73,12 +120,21 @@ function App() {
               <Detailcard
                 addToMyCards={addToMyCards}
                 removeMyCards={removeMyCards}
+                handleOwnCards={handleOwnCards}
+                ownCards={selectmyCards}
+                showCount={ownCard}
               />
             }
           />
           <Route
             path="/mycards"
-            element={<MyCards selectmyCards={selectmyCards} />}
+            element={
+              <MyCards
+                selectmyCards={selectmyCards}
+                addCard={addCard}
+                removeCard={removeCard}
+              />
+            }
           />
         </Routes>
         <Footer />
