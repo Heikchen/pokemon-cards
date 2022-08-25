@@ -7,7 +7,7 @@ function Card(props) {
       <div>
         <img
           className="all-cards-image"
-          src={props.card.images.small}
+          src={props.card.images?.small}
           alt={props.card.name}
         />
       </div>

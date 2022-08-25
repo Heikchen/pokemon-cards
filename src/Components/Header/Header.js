@@ -11,9 +11,9 @@ function Header() {
         <Link className="header-link" to="/allcards">
           All Pokémon Cards
         </Link>
-        <a className="header-link" href="#">
+        <Link className="header-link" to="/mycards">
           My Cards
-        </a>
+        </Link>
         <Link className="header-link" to="/allsets">
           Sets
         </Link>

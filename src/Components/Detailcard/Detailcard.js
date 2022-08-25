@@ -3,12 +3,14 @@ import React from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 
-function Detailcard() {
+function Detailcard(props) {
   const [oneCard, setOneCard] = React.useState([]);
   const [attacks, setAttacks] = React.useState([]);
   const [weakness, setWeakness] = React.useState([]);
   const [symbol, setSymbol] = React.useState([]);
+
   let urlParamId = useParams().id;
+
   React.useEffect(() => {
     if (urlParamId !== undefined) {
       fetchOneCard(urlParamId);
@@ -25,8 +27,12 @@ function Detailcard() {
         setSymbol(response.data.data.set.images.symbol);
       });
   };
+  React.useEffect(() => {
+    props.handleOwnCards(oneCard);
+  }, [oneCard, props.ownCards]);
+
   return (
-    <div>
+    <div key={oneCard.id}>
       <Link to={"/allcards"}>
         <button className="back-all-cards"> {"<"} </button>
       </Link>
@@ -38,9 +44,25 @@ function Detailcard() {
             alt={oneCard.name}
           />
           <h2 className="detail-card-add">Add to my Cards</h2>
+
+          {props.showCount.length > 0 ? (
+            <h2 className="detail-card-add">Own: {props.showCount}</h2>
+          ) : (
+            ""
+          )}
           <div className="detail-card-btn">
-            <button className="detail-card-add-btn">+</button>
-            <button className="detail-card-minus-btn">-</button>
+            <button
+              onClick={() => props.addToMyCards(oneCard)}
+              className="detail-card-add-btn"
+            >
+              +
+            </button>
+            <button
+              onClick={() => props.removeMyCards(oneCard)}
+              className="detail-card-minus-btn"
+            >
+              -
+            </button>
           </div>
         </div>
 

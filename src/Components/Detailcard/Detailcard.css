@@ -12,6 +12,9 @@
   margin: 24px 0 0 24px;
   cursor: pointer;
 }
+.back-all-cards:active {
+  transform: scale(0.94);
+}
 
 .detail-card {
   display: flex;
@@ -37,6 +40,7 @@
   font-weight: 500;
   text-align: center;
 }
+
 .detail-card-btn {
   display: flex;
   justify-content: center;
@@ -54,6 +58,10 @@
   font-family: pokemon-old;
   font-weight: 800;
   padding-top: 10px;
+  cursor: pointer;
+}
+.detail-card-add-btn:active {
+  transform: scale(0.94);
 }
 .detail-card-minus-btn {
   background-color: var(--primary-blue-color);
@@ -67,6 +75,10 @@
   font-family: pokemon-old;
   font-weight: 800;
   padding-top: 5px;
+  cursor: pointer;
+}
+.detail-card-minus-btn:active {
+  transform: scale(0.94);
 }
 .detail-card-info {
   display: flex;
@@ -104,17 +116,21 @@
 .detail-card-market-prices-holofoil,
 .detail-card-market-prices-reverseholofoil,
 .detail-card-market-prices-1stedition,
-.detail-card-market-prices-unlimited {
+.detail-card-market-prices-1steditionholofoil,
+.detail-card-market-prices-unlimited,
+.detail-card-market-prices-unlimitedholofoil {
   display: flex;
   gap: 24px;
 }
 .detail-card-market-detail {
   width: 25%;
+  flex-shrink: 0;
 }
 .detail-card-market-detail-name {
   font-weight: 500;
   text-transform: uppercase;
   font-size: 20px;
+  word-wrap: break-word;
 }
 .detail-card-market-detail-price {
   text-transform: uppercase;
