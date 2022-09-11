@@ -48,7 +48,7 @@ function Detailcard(props) {
           {props.showCount.length > 0 ? (
             <h2 className="detail-card-add">Own: {props.showCount}</h2>
           ) : (
-            ""
+            <>""</>
           )}
           <div className="detail-card-btn">
             <button
@@ -128,9 +128,6 @@ function Detailcard(props) {
                   </div>
                 </>
               ))}
-            {/* ) : (
-            ""
- )} */}
             <div className="detail-card-attacks">
               <h1 className="detail-card-attacks-title">Attacks</h1>
               {attacks !== undefined ? (
@@ -191,7 +188,6 @@ function Detailcard(props) {
                   <h1 className="info-name">Artist</h1>
                   <h2 className="info-text">{oneCard.artist}</h2>
                 </div>
-
                 <div>
                   <h1 className="info-name">Set</h1>
                   <Link to={`/set/${oneCard.set?.id}`}>
