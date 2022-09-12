@@ -45,8 +45,10 @@ function Detailcard(props) {
           />
           <h2 className="detail-card-add">Add to my Cards</h2>
 
-          {props.showCount.length > 0 && (
+          {props.showCount.length > 0 ? (
             <h2 className="detail-card-add">Own: {props.showCount}</h2>
+          ) : (
+            <></>
           )}
           <div className="detail-card-btn">
             <button
