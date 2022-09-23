@@ -86,7 +86,7 @@ function Detailcard(props) {
             <p className="detail-card-market-update">
               Last Updated: {oneCard.tcgplayer?.updatedAt}
             </p>
-            {oneCard.tcgplayer?.prices &&
+            {oneCard.tcgplayer?.prices ? (
               Object.keys(oneCard.tcgplayer.prices).map((priceItem) => (
                 <>
                   {console.log(priceItem)}
@@ -127,7 +127,10 @@ function Detailcard(props) {
                     </div>
                   </div>
                 </>
-              ))}
+              ))
+            ) : (
+              <></>
+            )}
             <div className="detail-card-attacks">
               <h1 className="detail-card-attacks-title">Attacks</h1>
               {attacks !== undefined ? (
