@@ -21,14 +21,16 @@
   justify-content: center;
   width: 100%;
   gap: 24px;
-  margin: 24px;
+
+  flex-wrap: wrap;
 }
 .detail-card-left {
-  width: 30%;
+  width: 20%;
   margin: 24px;
 }
 .detail-card-image {
   width: 100%;
+  flex-basis: 300px;
   height: fit-content;
   border-radius: 16px;
   box-shadow: 5px 0px 20px 0px black;
@@ -105,7 +107,6 @@
   width: 100%;
   flex-direction: column;
   display: flex;
-  border-bottom: 3px solid var(--primary-grey-color);
   color: var(--secondary-blue-color);
 }
 .detail-card-market-link {
@@ -120,11 +121,14 @@
 .detail-card-market-prices-unlimited,
 .detail-card-market-prices-unlimitedholofoil {
   display: flex;
-  gap: 24px;
+  justify-content: space-between;
+  gap: 12px;
+  overflow-x: scroll;
 }
 .detail-card-market-detail {
-  width: 25%;
+  width: 20%;
   flex-shrink: 0;
+  border: none;
 }
 .detail-card-market-detail-name {
   font-weight: 500;
@@ -235,4 +239,27 @@
   text-align: center;
   padding-top: 20px;
   font-size: 16px;
+}
+
+@media screen and (max-width: 900px) {
+  .detail-card-left,
+  .detail-card-info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+    align-items: center;
+  }
+  .detail-card {
+    margin: 24px 0 0 0;
+  }
+  .detail-card-legalities {
+    justify-content: center;
+  }
+  .back-all-cards {
+    margin: 24px 0 0 0;
+  }
+  .detail-card-image {
+    width: 300px;
+  }
 }
