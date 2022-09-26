@@ -67,6 +67,7 @@ function Detailcard(props) {
             </button>
           </div>
         </div>
+
         <div className="detail-card-info">
           <div className="detail-card-basic">
             <h1 className="detail-card-basic-name">{oneCard.name}</h1>
