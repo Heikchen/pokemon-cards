@@ -264,6 +264,33 @@ function Detailcard(props) {
                       {oneCard.number} / {oneCard.set?.total}
                     </h2>
                   </div>
+                )
+              ) : (
+                <p>Not available</p>
+              )}
+            </div>
+            <div className="detail-card-short-info">
+              <div className="info-left">
+                <div>
+                  <h1 className="info-name">Weakness</h1>
+                  {weakness !== undefined ? (
+                    weakness?.map((weaknessObject) => (
+                      <>
+                        <h2 className="info-text">
+                          {weaknessObject.type} {weaknessObject.value}
+                        </h2>
+                      </>
+                    ))
+                  ) : (
+                    <>
+                      <p>Not available</p>
+                    </>
+                  )}
+                </div>
+                <div>
+                  <h1 className="info-name">Rarity</h1>
+                  <h2 className="info-text">{oneCard.rarity}</h2>
+
                 </div>
                 <div className="info-right">
                   <div>
@@ -319,10 +346,51 @@ function Detailcard(props) {
                 </div>
               </div>
             </div>
+
+            <p className="detail-card-rule">{oneCard.rules}</p>
+            <div className="detail-card-legalities">
+              <div className="detail-card-legalities-container">
+                <p className="detail-card-legalities-name">Standard</p>
+                {oneCard.legalities?.standard !== undefined ? (
+                  <>
+                    <p className="detail-card-legalities-legal">Legal</p>
+                  </>
+                ) : (
+                  <>
+                    {" "}
+                    <p className="detail-card-legalities-notlegal">Not Legal</p>
+                  </>
+                )}
+              </div>
+              <div className="detail-card-legalities-container">
+                <p className="detail-card-legalities-name">Expanded</p>
+                {oneCard.legalities?.expanded !== undefined ? (
+                  <>
+                    <p className="detail-card-legalities-legal">Legal</p>
+                  </>
+                ) : (
+                  <>
+                    <p className="detail-card-legalities-notlegal">Not Legal</p>
+                  </>
+                )}
+              </div>
+              <div className="detail-card-legalities-container">
+                <p className="detail-card-legalities-name">Unlimited</p>
+                {oneCard.legalities?.unlimited !== undefined ? (
+                  <>
+                    <p className="detail-card-legalities-legal">Legal</p>
+                  </>
+                ) : (
+                  <>
+                    <p className="detail-card-legalities-notlegal">Not Legal</p>
+                  </>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
 
   );
 }
