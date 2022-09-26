@@ -45,9 +45,91 @@ function Detailcard(props) {
               alt={oneCard.name}
             />
             <h2 className="detail-card-add">Add to my Cards</h2>
+           
+          {props.showCount.length > 0 ? (
+            <h2 className="detail-card-add">Own: {props.showCount}</h2>
+          ) : (
+            <></>
+          )}
+          <div className="detail-card-btn">
+            <button
+              onClick={() => props.addToMyCards(oneCard)}
+              className="detail-card-add-btn"
+            >
+              +
+            </button>
+            <button
+              onClick={() => props.removeMyCards(oneCard)}
+              className="detail-card-minus-btn"
+            >
+              -
+            </button>
+          </div>
+        </div>
 
-            {props.showCount.length > 0 ? (
-              <h2 className="detail-card-add">Own: {props.showCount}</h2>
+        <div className="detail-card-info">
+          <div className="detail-card-basic">
+            <h1 className="detail-card-basic-name">{oneCard.name}</h1>
+            <p className="detail-card-basic-type">
+              {oneCard.supertype} - {oneCard.subtypes}
+            </p>
+            <p className="detail-card-basic-basic">
+              HP {oneCard.hp} - {oneCard.types}
+            </p>
+          </div>
+          <div className="detail-card-market">
+            <h1 className="detail-card-market-title">Prices</h1>
+            <a
+              className="detail-card-market-link"
+              href={oneCard.tcgplayer?.url}
+            >
+              From TCGPlyer
+            </a>
+            <p className="detail-card-market-update">
+              Last Updated: {oneCard.tcgplayer?.updatedAt}
+            </p>
+            {oneCard.tcgplayer?.prices ? (
+              Object.keys(oneCard.tcgplayer.prices).map((priceItem) => (
+                <>
+                  {console.log(priceItem)}
+                  <div
+                    className={`detail-card-market-prices-${priceItem.toLowerCase()}`}
+                  >
+                    <div className="detail-card-market-detail">
+                      <h2 className="detail-card-market-detail-name">
+                        {priceItem} Market
+                      </h2>
+                      <p className="detail-card-market-detail-price">
+                        ${oneCard.tcgplayer.prices[priceItem]?.market}
+                      </p>
+                    </div>
+                    <div className="detail-card-market-detail">
+                      <h2 className="detail-card-market-detail-name">
+                        {priceItem} Low
+                      </h2>
+                      <p className="detail-card-market-detail-price">
+                        ${oneCard.tcgplayer.prices[priceItem]?.low}
+                      </p>
+                    </div>
+                    <div className="detail-card-market-detail">
+                      <h2 className="detail-card-market-detail-name">
+                        {priceItem} Mid
+                      </h2>
+                      <p className="detail-card-market-detail-price">
+                        ${oneCard.tcgplayer.prices[priceItem]?.mid}
+                      </p>
+                    </div>
+                    <div className="detail-card-market-detail">
+                      <h2 className="detail-card-market-detail-name">
+                        {priceItem} High
+                      </h2>
+                      <p className="detail-card-market-detail-price">
+                        ${oneCard.tcgplayer.prices[priceItem]?.high}
+                      </p>
+                    </div>
+                  </div>
+                </>
+              ))
             ) : (
               <></>
             )}
@@ -241,6 +323,7 @@ function Detailcard(props) {
         </div>
       </div>
     </>
+
   );
 }
 
